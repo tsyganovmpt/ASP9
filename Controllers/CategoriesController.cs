@@ -56,7 +56,7 @@ namespace ApiAsp0.Controllers
             _context.Categories.Add(category);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idcategory = category.IdCategory });
+            return CreatedAtAction(nameof(GetById), new { idC = category.IdCategory }, ToDto(category));
         }
 
         [HttpPut("{idC}")]
@@ -68,7 +68,7 @@ namespace ApiAsp0.Controllers
             category.CategoryName = dto.CategoryName;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idC}")]
@@ -79,7 +79,7 @@ namespace ApiAsp0.Controllers
 
             _context.Categories.Remove(category);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idC}")]
@@ -91,7 +91,7 @@ namespace ApiAsp0.Controllers
             if (dto.CategoryName is not null) category.CategoryName = dto.CategoryName;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

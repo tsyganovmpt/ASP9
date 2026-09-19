@@ -63,7 +63,7 @@ namespace ApiAsp0.Controllers
             _context.Products.Add(product);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idproduct = product.IdProduct });
+            return CreatedAtAction(nameof(GetById), new { idP = product.IdProduct }, ToDto(product));
         }
 
         [HttpPut("{idP}")]
@@ -79,7 +79,7 @@ namespace ApiAsp0.Controllers
             product.CategoryId = dto.CategoryId;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idP}")]
@@ -90,7 +90,7 @@ namespace ApiAsp0.Controllers
 
             _context.Products.Remove(product);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idP}")]
@@ -106,7 +106,7 @@ namespace ApiAsp0.Controllers
             if (dto.CategoryId is not null) product.CategoryId = dto.CategoryId.Value;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
     }

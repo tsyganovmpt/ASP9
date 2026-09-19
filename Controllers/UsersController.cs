@@ -60,7 +60,7 @@ namespace ApiAsp0.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { iduser = user.IdUsers });
+            return CreatedAtAction(nameof(GetById), new { idU = user.IdUsers }, ToDto(user));
         }
 
         [HttpPut("{idU}")]
@@ -74,7 +74,7 @@ namespace ApiAsp0.Controllers
             user.RoleId = dto.RoleId;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idU}")]
@@ -85,7 +85,7 @@ namespace ApiAsp0.Controllers
 
             _context.Users.Remove(user);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idU}")]
@@ -99,7 +99,7 @@ namespace ApiAsp0.Controllers
             if (dto.RoleId is not null) user.RoleId = dto.RoleId.Value;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

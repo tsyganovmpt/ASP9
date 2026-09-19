@@ -58,7 +58,7 @@ namespace ApiAsp0.Controllers
             _context.Carts.Add(cart);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idcart = cart.IdCart });
+            return CreatedAtAction(nameof(GetById), new { idC = cart.IdCart }, ToDto(cart));
         }
 
         [HttpPut("{idC}")]
@@ -70,7 +70,7 @@ namespace ApiAsp0.Controllers
             cart.UsersId = dto.UsersId;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idC}")]
@@ -81,7 +81,7 @@ namespace ApiAsp0.Controllers
 
             _context.Carts.Remove(cart);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idC}")]
@@ -93,7 +93,7 @@ namespace ApiAsp0.Controllers
             if (dto.UsersId is not null) cart.UsersId = dto.UsersId.Value;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace ApiAsp0.Controllers
             _context.OrderItems.Add(orderitem);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idorderitem = orderitem.IdOrderItem });
+            return CreatedAtAction(nameof(GetById), new { idOI = orderitem.IdOrderItem }, ToDto(orderitem));
         }
 
         [HttpPut("{idOI}")]
@@ -77,7 +77,7 @@ namespace ApiAsp0.Controllers
 
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idOI}")]
@@ -88,7 +88,7 @@ namespace ApiAsp0.Controllers
 
             _context.OrderItems.Remove(orderitem);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idOI}")]
@@ -103,7 +103,7 @@ namespace ApiAsp0.Controllers
             if (dto.OrderId is not null) orderitem.OrderId = dto.OrderId.Value;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

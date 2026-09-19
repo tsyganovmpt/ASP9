@@ -60,7 +60,7 @@ namespace ApiAsp0.Controllers
             _context.CartItems.Add(cartitem);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idcartitem = cartitem.IdCartItem });
+            return CreatedAtAction(nameof(GetById), new { idCI = cartitem.IdCartItem }, ToDto(cartitem));
         }
 
         [HttpPut("{idCI}")]
@@ -74,7 +74,7 @@ namespace ApiAsp0.Controllers
             cartitem.Quantity = dto.Quantity;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idCI}")]
@@ -85,7 +85,7 @@ namespace ApiAsp0.Controllers
 
             _context.CartItems.Remove(cartitem);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idCI}")]
@@ -99,7 +99,7 @@ namespace ApiAsp0.Controllers
             if (dto.Quantity is not null) { cartitem.Quantity = dto.Quantity.Value; }
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

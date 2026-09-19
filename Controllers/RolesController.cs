@@ -55,7 +55,7 @@ namespace ApiAsp0.Controllers
             _context.Roles.Add(role);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { idrole = role.IdRole });
+            return CreatedAtAction(nameof(GetById), new { idR = role.IdRole }, ToDto(role));
         }
 
         [HttpPut("{idR}")]
@@ -68,7 +68,7 @@ namespace ApiAsp0.Controllers
             
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idR}")]
@@ -79,7 +79,7 @@ namespace ApiAsp0.Controllers
 
             _context.Roles.Remove(role);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idR}")]
@@ -91,7 +91,7 @@ namespace ApiAsp0.Controllers
             if (dto.RoleName is not null) role.RoleName = dto.RoleName;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }

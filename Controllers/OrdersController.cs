@@ -59,7 +59,7 @@ namespace ApiAsp0.Controllers
             _context.Orders.Add(order);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { iduser = order.IdOrder });
+            return CreatedAtAction(nameof(GetById), new { idO = order.IdOrder }, ToDto(order));
         }
 
         [HttpPut("{idO}")]
@@ -71,7 +71,7 @@ namespace ApiAsp0.Controllers
             order.TotalPrice = dto.TotalPrice;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{idO}")]
@@ -82,7 +82,7 @@ namespace ApiAsp0.Controllers
 
             _context.Orders.Remove(order);
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPatch("{idO}")]
@@ -94,7 +94,7 @@ namespace ApiAsp0.Controllers
             if (dto.TotalPrice is not null) order.TotalPrice = dto.TotalPrice.Value;
 
             _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 }
